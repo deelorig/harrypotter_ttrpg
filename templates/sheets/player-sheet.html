@@ -1,0 +1,881 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div id="info_block" style="display: none;" class="info_block">
+        <span style="font-weight: 800;" id="info_block_title"></span>
+        <p id="info_block_description" class="artifact_description"></p>
+        <i onclick="hideInfo()" class="fas fa-window-close"></i>
+    </div>
+    <div id="check_block" style="display: none;" class="info_block">
+        <span style="font-weight: 800;" id="check_block_title">{{localize "system.standard_test"}}</span>
+        <i onclick="hideInfo()" class="fas fa-window-close"></i>
+        <div class="standard_block_title">
+            <label><input type="radio" id="radio_skill1" onclick="stdTestSkill(0, '00')" value="0" name="std_test1"/>{{localize "system.standard_block.skill"}}</label>
+            <label><input type="radio" id="radio_attr1" onclick="stdTestAttr(0, '00')" value="1" name="std_test1"/>{{localize "system.standard_block.attribute"}}</label>
+        </div>
+        <select id="first_var"></select>
+        <div class="standard_block_title">
+            <label><input type="radio" id="radio_skill2" onclick="stdTestSkill(1, '00')" value="0" name="std_test2"/>{{localize "system.standard_block.skill"}}</label>
+            <label><input type="radio" id="radio_attr2" onclick="stdTestAttr(1, '00')" value="1" name="std_test2"/>{{localize "system.standard_block.attribute"}}</label>
+        </div>
+        <select id="second_var"></select>
+        <div class="standard_block_title">
+            <label>{{localize "system.difficulty"}}</label>
+        </div>
+        <select id="difficulty_var">
+            {{#each config.difficulty as |item type|}}
+                <option id="difficulty_{{item.value}}" value="{{item.value}}">{{localize item.name}}</option>
+            {{/each}}
+        </select>
+        <div class="standard_block_title">
+            <label>{{localize "system.penalty"}}: <label id="standard_penalty"></label></label>
+        </div>
+        <div class="standard_block_roll"><label class="stadard_roll">{{localize "system.standard_block.roll"}}</label></div>
+    </div>
+    <table style="min-width: 1000px;">
+        <tr>
+            <td class="col0">
+                <img class="avatar" data-edit="img" src="{{actor.img}}" title="{{actor.name}}"/>
+                <img class="avatar_border" src="systems/harrypotter_ttrpg/img/border.png" style="pointer-events: none;" title="{{actor.name}}"/>
+                <span class="col0_btitle">{{localize "system.sheet.health"}}</span>
+                <span class="col0_title">{{localize "system.sheet.body"}}</span>
+                
+                <input style="display: none;" type="hidden" id="tab_value" value="{{actor.system.bio.last_tab.value}}">
+                <div style="display: none;" class="col0_group">
+                    <input type="radio" id="tab_0" name="system.bio.last_tab.value" value="0"/>
+                    <input type="radio" id="tab_1" name="system.bio.last_tab.value" value="1"/>
+                    <input type="radio" id="tab_2" name="system.bio.last_tab.value" value="2"/>
+                    <input type="radio" id="tab_3" name="system.bio.last_tab.value" value="3"/>
+                    <input type="radio" id="tab_4" name="system.bio.last_tab.value" value="4"/>
+                </div>
+                
+                <input type="hidden" id="body_value" value="{{actor.system.body.value}}">
+                <div class="col0_group">
+                    <input type="radio" id="body_0" name="system.body.value" value="0"/>
+                    <input type="radio" id="body_1" name="system.body.value" value="1"/>
+                    <input type="radio" id="body_2" name="system.body.value" value="2"/>
+                    <input type="radio" id="body_3" name="system.body.value" value="3"/>
+                    <input type="radio" id="body_4" name="system.body.value" value="4"/>
+                    <input type="radio" id="body_5" name="system.body.value" value="5"/>
+                    <input type="radio" id="body_6" name="system.body.value" value="6"/>
+                </div>
+                <span id="body_text_0" style="display: none;" class="col0_title">{{localize "system.body_status.ok"}}</span>
+                <span id="body_text_1" style="display: none;" class="col0_title">{{localize "system.body_status.shaken"}}</span>
+                <span id="body_text_2" style="display: none;" class="col0_title">{{localize "system.body_status.bruised"}}</span>
+                <span id="body_text_3" style="display: none;" class="col0_title">{{localize "system.body_status.bloodied"}}</span>
+                <span id="body_text_4" style="display: none;" class="col0_title">{{localize "system.body_status.broken"}}</span>
+                <span id="body_text_5" style="display: none;" class="col0_title">{{localize "system.body_status.fading"}}</span>
+                <span id="body_text_6" style="display: none;" class="col0_title">{{localize "system.body_status.lifeless"}}</span>           
+                <span class="col0_title col0_margin">{{localize "system.sheet.mind"}}</span>
+                <input type="hidden" id="mind_value" value="{{actor.system.mind.value}}">
+                <div class="col0_group">
+                    <input type="radio" id="mind_0" name="system.mind.value" value="0"/>
+                    <input type="radio" id="mind_1" name="system.mind.value" value="1"/>
+                    <input type="radio" id="mind_2" name="system.mind.value" value="2"/>
+                    <input type="radio" id="mind_3" name="system.mind.value" value="3"/>
+                    <input type="radio" id="mind_4" name="system.mind.value" value="4"/>
+                    <input type="radio" id="mind_5" name="system.mind.value" value="5"/>
+                    <input type="radio" id="mind_6" name="system.mind.value" value="6"/>
+                </div>
+                <span id="mind_text_0" style="display: none;" class="col0_title">{{localize "system.mind_status.ok"}}</span>
+                <span id="mind_text_1" style="display: none;" class="col0_title">{{localize "system.mind_status.shaken"}}</span>
+                <span id="mind_text_2" style="display: none;" class="col0_title">{{localize "system.mind_status.bruised"}}</span>
+                <span id="mind_text_3" style="display: none;" class="col0_title">{{localize "system.mind_status.bloodied"}}</span>
+                <span id="mind_text_4" style="display: none;" class="col0_title">{{localize "system.mind_status.broken"}}</span>
+                <span id="mind_text_5" style="display: none;" class="col0_title">{{localize "system.mind_status.fading"}}</span>
+                <span id="mind_text_6" style="display: none;" class="col0_title">{{localize "system.mind_status.lifeless"}}</span>                
+                <span class="col0_btitle col0_margin">{{localize "system.sheet.wand"}}</span>
+                <span class="col0_title">{{localize "system.wand.wood"}}</span>
+                <section class="section_wand">
+                    {{#each actor.wand_wood as |wood id|}}
+                    <div>
+                        <span class="section_wand_bold">{{wood.name}}</span>
+                        <span class="section_wand_overflow">{{wood.system.description}}</span>
+                        <div onclick="showInfo('{{wood.name}}','{{wood.system.description}}')" class="control_layer">
+                            <i id="{{wood._id}}" class="fas fa-trash"></i>
+                        </div>
+                    </div>
+                    {{/each}}
+                </section>
+                <span class="col0_title">{{localize "system.wand.length"}}</span>
+                <input type="text" name="system.wand.length" value="{{actor.system.wand.length}}" class="wand_length"/>
+                <span class="col0_title">{{localize "system.wand.core"}}</span>
+                <input type="text" name="system.wand.core" value="{{actor.system.wand.core}}" class="wand_length"/>
+                <span class="col0_title">{{localize "system.wand.flex"}}</span>
+                <input type="hidden" id="hidden_flex" value="{{actor.system.wand.flex}}"/>
+                <select name="system.wand.flex" class="wand_select">
+                    {{#each config.flexibilityTypes as |item type|}}
+                        <option id="flex_{{item.value}}" value="{{item.value}}">{{localize item.name}} ({{item.value}})</option>
+                    {{/each}}
+                </select>
+                <span class="generate_wand">{{localize "system.create_wand"}}</span>
+            </td>
+            <td class="col1">
+                <div class="name">
+                    <span>{{localize "system.name"}}</span>
+                    <input id="name_place" type="text" name="name" value="{{actor.name}}"/>
+                </div>
+                <table style="table-layout:fixed;">
+                    <tr>
+                        <td style="width:33%;">
+                            <div class="attribute">
+                                <a id="attr_0" class="attribute_quick"><span class="test_attr">{{localize "system.attributes.vitality"}}</span></a>
+                                <input type="number" name="system.attributes.vitality" value="{{actor.system.attributes.vitality}}"/>
+                            </div>
+                            <div class="attribute">
+                                <a id="attr_1" class="attribute_quick"><span class="test_attr">{{localize "system.attributes.speed"}}</span></a>
+                                <input type="number" name="system.attributes.speed" value="{{actor.system.attributes.speed}}"/>
+                            </div>
+                            <div class="attribute">
+                                <a id="attr_2" class="attribute_quick"><span class="test_attr">{{localize "system.attributes.wits"}}</span></a>
+                                <input type="number" name="system.attributes.wits" value="{{actor.system.attributes.wits}}"/>
+                            </div>
+                        </td>
+                        <td style="width:33%;">
+                            <div class="attribute">
+                                <a id="attr_3" class="attribute_quick"><span class="test_attr">{{localize "system.attributes.knowledge"}}</span></a>
+                                <input type="number" name="system.attributes.knowledge" value="{{actor.system.attributes.knowledge}}"/>
+                            </div>
+                            <div class="attribute">
+                                <a id="attr_4" class="attribute_quick"><span class="test_attr">{{localize "system.attributes.focus"}}</span></a>
+                                <input type="number" name="system.attributes.focus" value="{{actor.system.attributes.focus}}"/>
+                            </div>
+                            <input class="familliar" name="system.pet" value="{{actor.system.pet}}" placeholder="{{localize "system.pet"}}" type="text"/>
+                        </td>
+                        <td class="story_points">
+                            <span>{{localize "system.story_points"}}</span>
+                            <input type="number" name="system.points" value="{{actor.system.points}}"/>
+                        </td>
+                    </tr>
+                </table>
+                <table style="table-layout:fixed;">
+                    <tr>
+                        <td onclick="setTab(0)" class="main_tabs tabs_active">{{localize "system.sheet.bio"}}</td>
+                        <td onclick="setTab(1)" class="main_tabs">{{localize "system.sheet.skills"}}</td>
+                        <td onclick="setTab(2)" class="main_tabs">{{localize "system.sheet.artifacts"}}</td>
+                        <td onclick="setTab(3)" class="main_tabs">{{localize "system.sheet.spells"}}</td>
+                        <td onclick="setTab(4)" class="main_tabs">{{localize "system.sheet.potions"}}</td>
+                    </tr>
+                    <tr class="tab_content tab_active">
+                        <td colspan="5">
+                            <div class="name">
+                                <span style="padding-left: 0px;">{{localize "system.sheet.lineage"}}</span>
+                                <input type="text" placeholder="{{localize "system.sheet.lineage"}}..." name="system.bio.lineage" value="{{actor.system.bio.lineage}}"/>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <textarea placeholder="{{localize "system.sheet.profession"}}" name="system.bio.profession">{{actor.system.bio.profession}}</textarea>
+                                    </td>
+                                    <td class="school_info" style="width:300px;">
+                                        <span>{{localize "system.sheet.school"}}</span>
+                                        <input type="text" name="system.bio.school" value="{{actor.system.bio.school}}"/>
+                                        <span>{{localize "system.sheet.year"}}</span>
+                                        <input type="number" name="system.bio.year.value" value="{{actor.system.bio.year.value}}"/>
+                                        <span>{{localize "system.sheet.house"}}</span>
+                                        <input type="text" name="system.bio.house" value="{{actor.system.bio.house}}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <span class="col0_btitle">{{localize "system.sheet.notes"}}</span>
+                            <textarea style="height:400px;" name="system.bio.notes" placeholder="{{localize "system.sheet.notes"}}...">{{actor.system.bio.notes}}</textarea>
+                        </td>
+                    </tr>
+                    <tr class="tab_content">
+                        <td colspan="5">   
+                            <table style="table-layout:fixed;">
+                                <tr>
+                                    <td style="width:33%;">
+                                        <div id="skill_00" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'00')">{{#if (eq actor.system.skills.skill_00.name "")}} {{localize "system.skills.skill_0"}} {{/if}}{{actor.system.skills.skill_00.name}} ({{actor.system.skills.skill_00.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_00" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('00',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_00_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_00.name" value="{{#if (eq actor.system.skills.skill_00.name "")}} {{localize "system.skills.skill_0"}} {{/if}}{{actor.system.skills.skill_00.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_00.value" type="number" value="{{actor.system.skills.skill_00.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('00',true)"></i>
+                                        </div>
+                                       
+                                        <div id="skill_01" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'01')">{{#if (eq actor.system.skills.skill_01.name "")}} {{localize "system.skills.skill_1"}} {{/if}}{{actor.system.skills.skill_01.name}} ({{actor.system.skills.skill_01.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_01" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('01',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_01_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_01.name" value="{{#if (eq actor.system.skills.skill_01.name "")}} {{localize "system.skills.skill_1"}} {{/if}}{{actor.system.skills.skill_01.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_01.value" type="number" value="{{actor.system.skills.skill_01.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('01',true)"></i>
+                                        </div>
+
+                                        <div id="skill_02" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'02')">{{#if (eq actor.system.skills.skill_02.name "")}} {{localize "system.skills.skill_2"}} {{/if}}{{actor.system.skills.skill_02.name}} ({{actor.system.skills.skill_02.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_02" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('02',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_02_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_02.name" value="{{#if (eq actor.system.skills.skill_02.name "")}} {{localize "system.skills.skill_2"}} {{/if}}{{actor.system.skills.skill_02.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_02.value" type="number" value="{{actor.system.skills.skill_02.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('02',true)"></i>
+                                        </div>
+
+                                        <div id="skill_03" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'03')">{{#if (eq actor.system.skills.skill_03.name "")}} {{localize "system.skills.skill_3"}} {{/if}}{{actor.system.skills.skill_03.name}} ({{actor.system.skills.skill_03.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_03" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('03',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_03_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_03.name" value="{{#if (eq actor.system.skills.skill_03.name "")}} {{localize "system.skills.skill_3"}} {{/if}}{{actor.system.skills.skill_03.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_03.value" type="number" value="{{actor.system.skills.skill_03.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('03',true)"></i>
+                                        </div>
+
+                                        <div id="skill_04" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'04')">{{#if (eq actor.system.skills.skill_04.name "")}} {{localize "system.skills.skill_4"}} {{/if}}{{actor.system.skills.skill_04.name}} ({{actor.system.skills.skill_04.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_04" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('04',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_04_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_04.name" value="{{#if (eq actor.system.skills.skill_04.name "")}} {{localize "system.skills.skill_4"}} {{/if}}{{actor.system.skills.skill_04.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_04.value" type="number" value="{{actor.system.skills.skill_04.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('04',true)"></i>
+                                        </div>
+
+                                        <div id="skill_05" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'05')">{{#if (eq actor.system.skills.skill_05.name "")}} {{localize "system.skills.skill_5"}} {{/if}}{{actor.system.skills.skill_05.name}} ({{actor.system.skills.skill_05.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_05" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('05',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_05_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_05.name" value="{{#if (eq actor.system.skills.skill_05.name "")}} {{localize "system.skills.skill_5"}} {{/if}}{{actor.system.skills.skill_05.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_05.value" type="number" value="{{actor.system.skills.skill_05.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('05',true)"></i>
+                                        </div>
+
+                                        <div id="skill_06" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'06')">{{#if (eq actor.system.skills.skill_06.name "")}} {{localize "system.skills.skill_6"}} {{/if}}{{actor.system.skills.skill_06.name}} ({{actor.system.skills.skill_06.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_06" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('06',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_06_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_06.name" value="{{#if (eq actor.system.skills.skill_06.name "")}} {{localize "system.skills.skill_6"}} {{/if}}{{actor.system.skills.skill_06.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_06.value" type="number" value="{{actor.system.skills.skill_06.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('06',true)"></i>
+                                        </div>
+
+                                        <div id="skill_07" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'07')">{{#if (eq actor.system.skills.skill_07.name "")}} {{localize "system.skills.skill_7"}} {{/if}}{{actor.system.skills.skill_07.name}} ({{actor.system.skills.skill_07.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_07" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('07',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_07_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_07.name" value="{{#if (eq actor.system.skills.skill_07.name "")}} {{localize "system.skills.skill_7"}} {{/if}}{{actor.system.skills.skill_07.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_07.value" type="number" value="{{actor.system.skills.skill_07.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('07',true)"></i>
+                                        </div>
+
+                                        <div id="skill_08" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'08')">{{#if (eq actor.system.skills.skill_08.name "")}} {{localize "system.skills.skill_8"}} {{/if}}{{actor.system.skills.skill_08.name}} ({{actor.system.skills.skill_08.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_08" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('08',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_08_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_08.name" value="{{#if (eq actor.system.skills.skill_08.name "")}} {{localize "system.skills.skill_8"}} {{/if}}{{actor.system.skills.skill_08.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_08.value" type="number" value="{{actor.system.skills.skill_08.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('08',true)"></i>
+                                        </div>
+
+                                        <div id="skill_09" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'09')">{{#if (eq actor.system.skills.skill_09.name "")}} {{localize "system.skills.skill_9"}} {{/if}}{{actor.system.skills.skill_09.name}} ({{actor.system.skills.skill_09.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_09" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('09',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_09_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_09.name" value="{{#if (eq actor.system.skills.skill_09.name "")}} {{localize "system.skills.skill_9"}} {{/if}}{{actor.system.skills.skill_09.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_09.value" type="number" value="{{actor.system.skills.skill_09.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('09',true)"></i>
+                                        </div>
+
+                                        <div id="skill_10" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'10')">{{#if (eq actor.system.skills.skill_10.name "")}} {{localize "system.skills.skill_10"}} {{/if}}{{actor.system.skills.skill_10.name}} ({{actor.system.skills.skill_10.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_10" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('10',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_10_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_10.name" value="{{#if (eq actor.system.skills.skill_10.name "")}} {{localize "system.skills.skill_10"}} {{/if}}{{actor.system.skills.skill_10.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_10.value" type="number" value="{{actor.system.skills.skill_10.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('10',true)"></i>
+                                        </div>
+
+                                        <div id="skill_11" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'11')">{{#if (eq actor.system.skills.skill_11.name "")}} {{localize "system.skills.skill_11"}} {{/if}}{{actor.system.skills.skill_11.name}} ({{actor.system.skills.skill_11.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_11" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('11',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_11_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_11.name" value="{{#if (eq actor.system.skills.skill_11.name "")}} {{localize "system.skills.skill_11"}} {{/if}}{{actor.system.skills.skill_11.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_11.value" type="number" value="{{actor.system.skills.skill_11.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('11',true)"></i>
+                                        </div>
+
+                                        <div id="skill_12" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'12')">{{#if (eq actor.system.skills.skill_12.name "")}} {{localize "system.skills.skill_12"}} {{/if}}{{actor.system.skills.skill_12.name}} ({{actor.system.skills.skill_12.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_12" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('12',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_12_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_12.name" value="{{#if (eq actor.system.skills.skill_12.name "")}} {{localize "system.skills.skill_12"}} {{/if}}{{actor.system.skills.skill_12.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_12.value" type="number" value="{{actor.system.skills.skill_12.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('12',true)"></i>
+                                        </div>
+
+                                        <div id="skill_13" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'13')">{{#if (eq actor.system.skills.skill_13.name "")}} {{localize "system.skills.skill_13"}} {{/if}}{{actor.system.skills.skill_13.name}} ({{actor.system.skills.skill_13.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_13" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('13',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_13_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_13.name" value="{{#if (eq actor.system.skills.skill_13.name "")}} {{localize "system.skills.skill_13"}} {{/if}}{{actor.system.skills.skill_13.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_13.value" type="number" value="{{actor.system.skills.skill_13.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('13',true)"></i>
+                                        </div>
+                                    </td>
+                                    <td style="width:33%;">
+                                        <div id="skill_14" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'14')">{{#if (eq actor.system.skills.skill_14.name "")}} {{localize "system.skills.skill_14"}} {{/if}}{{actor.system.skills.skill_14.name}} ({{actor.system.skills.skill_14.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_14" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('14',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_14_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_14.name" value="{{#if (eq actor.system.skills.skill_14.name "")}} {{localize "system.skills.skill_14"}} {{/if}}{{actor.system.skills.skill_14.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_14.value" type="number" value="{{actor.system.skills.skill_14.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('14',true)"></i>
+                                        </div>
+
+                                        <div id="skill_15" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'15')">{{#if (eq actor.system.skills.skill_15.name "")}} {{localize "system.skills.skill_15"}} {{/if}}{{actor.system.skills.skill_15.name}} ({{actor.system.skills.skill_15.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_15" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('15',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_15_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_15.name" value="{{#if (eq actor.system.skills.skill_15.name "")}} {{localize "system.skills.skill_15"}} {{/if}}{{actor.system.skills.skill_15.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_15.value" type="number" value="{{actor.system.skills.skill_15.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('15',true)"></i>
+                                        </div>
+
+                                        <div id="skill_16" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'16')">{{#if (eq actor.system.skills.skill_16.name "")}} {{localize "system.skills.skill_16"}} {{/if}}{{actor.system.skills.skill_16.name}} ({{actor.system.skills.skill_16.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_16" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('16',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_16_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_16.name" value="{{#if (eq actor.system.skills.skill_16.name "")}} {{localize "system.skills.skill_16"}} {{/if}}{{actor.system.skills.skill_16.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_16.value" type="number" value="{{actor.system.skills.skill_16.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('16',true)"></i>
+                                        </div>
+
+                                        <div id="skill_17" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'17')">{{#if (eq actor.system.skills.skill_17.name "")}} {{localize "system.skills.skill_17"}} {{/if}}{{actor.system.skills.skill_17.name}} ({{actor.system.skills.skill_17.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_17" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('17',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_17_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_17.name" value="{{#if (eq actor.system.skills.skill_17.name "")}} {{localize "system.skills.skill_17"}} {{/if}}{{actor.system.skills.skill_17.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_17.value" type="number" value="{{actor.system.skills.skill_17.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('17',true)"></i>
+                                        </div>
+
+                                        <div id="skill_18" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'18')">{{#if (eq actor.system.skills.skill_18.name "")}} {{localize "system.skills.skill_18"}} {{/if}}{{actor.system.skills.skill_18.name}} ({{actor.system.skills.skill_18.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_18" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('18',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_18_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_18.name" value="{{#if (eq actor.system.skills.skill_18.name "")}} {{localize "system.skills.skill_18"}} {{/if}}{{actor.system.skills.skill_18.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_18.value" type="number" value="{{actor.system.skills.skill_18.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('18',true)"></i>
+                                        </div>
+
+                                        <div id="skill_19" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'19')">{{#if (eq actor.system.skills.skill_19.name "")}} {{localize "system.skills.skill_19"}} {{/if}}{{actor.system.skills.skill_19.name}} ({{actor.system.skills.skill_19.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_19" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('19',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_19_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_19.name" value="{{#if (eq actor.system.skills.skill_19.name "")}} {{localize "system.skills.skill_19"}} {{/if}}{{actor.system.skills.skill_19.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_19.value" type="number" value="{{actor.system.skills.skill_19.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('19',true)"></i>
+                                        </div>
+
+                                        <div id="skill_20" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'20')">{{#if (eq actor.system.skills.skill_20.name "")}} {{localize "system.skills.skill_20"}} {{/if}}{{actor.system.skills.skill_20.name}} ({{actor.system.skills.skill_20.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_20" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('20',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_20_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_20.name" value="{{#if (eq actor.system.skills.skill_20.name "")}} {{localize "system.skills.skill_20"}} {{/if}}{{actor.system.skills.skill_20.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_20.value" type="number" value="{{actor.system.skills.skill_20.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('20',true)"></i>
+                                        </div>
+
+                                        <div id="skill_21" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'21')">{{#if (eq actor.system.skills.skill_21.name "")}} {{localize "system.skills.skill_21"}} {{/if}}{{actor.system.skills.skill_21.name}} ({{actor.system.skills.skill_21.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_21" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('21',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_21_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_21.name" value="{{#if (eq actor.system.skills.skill_21.name "")}} {{localize "system.skills.skill_21"}} {{/if}}{{actor.system.skills.skill_21.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_21.value" type="number" value="{{actor.system.skills.skill_21.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('21',true)"></i>
+                                        </div>
+
+                                        <div id="skill_22" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'22')">{{#if (eq actor.system.skills.skill_22.name "")}} {{localize "system.skills.skill_22"}} {{/if}}{{actor.system.skills.skill_22.name}} ({{actor.system.skills.skill_22.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_22" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('22',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_22_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_22.name" value="{{#if (eq actor.system.skills.skill_22.name "")}} {{localize "system.skills.skill_22"}} {{/if}}{{actor.system.skills.skill_22.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_22.value" type="number" value="{{actor.system.skills.skill_22.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('22',true)"></i>
+                                        </div>
+
+                                        <div id="skill_23" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'23')">{{#if (eq actor.system.skills.skill_23.name "")}} {{localize "system.skills.skill_23"}} {{/if}}{{actor.system.skills.skill_23.name}} ({{actor.system.skills.skill_23.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_23" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('23',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_23_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_23.name" value="{{#if (eq actor.system.skills.skill_23.name "")}} {{localize "system.skills.skill_23"}} {{/if}}{{actor.system.skills.skill_23.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_23.value" type="number" value="{{actor.system.skills.skill_23.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('23',true)"></i>
+                                        </div>
+
+                                        <div id="skill_24" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'24')">{{#if (eq actor.system.skills.skill_24.name "")}} {{localize "system.skills.skill_24"}} {{/if}}{{actor.system.skills.skill_24.name}} ({{actor.system.skills.skill_24.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_24" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('24',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_24_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_24.name" value="{{#if (eq actor.system.skills.skill_24.name "")}} {{localize "system.skills.skill_24"}} {{/if}}{{actor.system.skills.skill_24.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_24.value" type="number" value="{{actor.system.skills.skill_24.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('24',true)"></i>
+                                        </div>
+
+                                        <div id="skill_25" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'25')">{{#if (eq actor.system.skills.skill_25.name "")}} {{localize "system.skills.skill_25"}} {{/if}}{{actor.system.skills.skill_25.name}} ({{actor.system.skills.skill_25.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_25" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('25',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_25_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_25.name" value="{{#if (eq actor.system.skills.skill_25.name "")}} {{localize "system.skills.skill_25"}} {{/if}}{{actor.system.skills.skill_25.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_25.value" type="number" value="{{actor.system.skills.skill_25.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('25',true)"></i>
+                                        </div>
+
+                                        <div id="skill_26" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'26')">{{#if (eq actor.system.skills.skill_26.name "")}} {{localize "system.skills.skill_26"}} {{/if}}{{actor.system.skills.skill_26.name}} ({{actor.system.skills.skill_26.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_26" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('26',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_26_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_26.name" value="{{#if (eq actor.system.skills.skill_26.name "")}} {{localize "system.skills.skill_26"}} {{/if}}{{actor.system.skills.skill_26.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_26.value" type="number" value="{{actor.system.skills.skill_26.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('26',true)"></i>
+                                        </div>
+
+                                        <div id="skill_27" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'27')">{{#if (eq actor.system.skills.skill_27.name "")}} {{localize "system.skills.skill_27"}} {{/if}}{{actor.system.skills.skill_27.name}} ({{actor.system.skills.skill_27.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_27" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('27',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_27_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_27.name" value="{{#if (eq actor.system.skills.skill_27.name "")}} {{localize "system.skills.skill_27"}} {{/if}}{{actor.system.skills.skill_27.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_27.value" type="number" value="{{actor.system.skills.skill_27.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('27',true)"></i>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="skill_28" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'28')">{{#if (eq actor.system.skills.skill_28.name "")}} {{localize "system.skills.skill_28"}} {{/if}}{{actor.system.skills.skill_28.name}} ({{actor.system.skills.skill_28.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_28" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('28',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_28_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_28.name" value="{{#if (eq actor.system.skills.skill_28.name "")}} {{localize "system.skills.skill_28"}} {{/if}}{{actor.system.skills.skill_28.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_28.value" type="number" value="{{actor.system.skills.skill_28.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('28',true)"></i>
+                                        </div>
+
+                                        <div id="skill_29" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'29')">{{#if (eq actor.system.skills.skill_29.name "")}} {{localize "system.skills.skill_29"}} {{/if}}{{actor.system.skills.skill_29.name}} ({{actor.system.skills.skill_29.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_29" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('29',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_29_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_29.name" value="{{#if (eq actor.system.skills.skill_29.name "")}} {{localize "system.skills.skill_29"}} {{/if}}{{actor.system.skills.skill_29.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_29.value" type="number" value="{{actor.system.skills.skill_29.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('29',true)"></i>
+                                        </div>
+
+                                        <div id="skill_30" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'30')">{{#if (eq actor.system.skills.skill_30.name "")}} {{localize "system.skills.skill_30"}} {{/if}}{{actor.system.skills.skill_30.name}} ({{actor.system.skills.skill_30.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_30" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('30',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_30_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_30.name" value="{{#if (eq actor.system.skills.skill_30.name "")}} {{localize "system.skills.skill_30"}} {{/if}}{{actor.system.skills.skill_30.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_30.value" type="number" value="{{actor.system.skills.skill_30.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('30',true)"></i>
+                                        </div>
+
+                                        <div id="skill_31" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'31')">{{#if (eq actor.system.skills.skill_31.name "")}} {{localize "system.skills.skill_31"}} {{/if}}{{actor.system.skills.skill_31.name}} ({{actor.system.skills.skill_31.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_31" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('31',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_31_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_31.name" value="{{#if (eq actor.system.skills.skill_31.name "")}} {{localize "system.skills.skill_31"}} {{/if}}{{actor.system.skills.skill_31.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_31.value" type="number" value="{{actor.system.skills.skill_31.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('31',true)"></i>
+                                        </div>
+
+                                        <div id="skill_32" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'32')">{{#if (eq actor.system.skills.skill_32.name "")}} {{localize "system.skills.skill_32"}} {{/if}}{{actor.system.skills.skill_32.name}} ({{actor.system.skills.skill_32.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_32" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('32',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_32_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_32.name" value="{{#if (eq actor.system.skills.skill_32.name "")}} {{localize "system.skills.skill_32"}} {{/if}}{{actor.system.skills.skill_32.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_32.value" type="number" value="{{actor.system.skills.skill_32.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('32',true)"></i>
+                                        </div>
+
+                                        <div id="skill_33" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'33')">{{#if (eq actor.system.skills.skill_33.name "")}} {{localize "system.skills.skill_33"}} {{/if}}{{actor.system.skills.skill_33.name}} ({{actor.system.skills.skill_33.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_33" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('33',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_33_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_33.name" value="{{#if (eq actor.system.skills.skill_33.name "")}} {{localize "system.skills.skill_33"}} {{/if}}{{actor.system.skills.skill_33.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_33.value" type="number" value="{{actor.system.skills.skill_33.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('33',true)"></i>
+                                        </div>
+
+                                        <div id="skill_34" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'34')">{{#if (eq actor.system.skills.skill_34.name "")}} {{localize "system.skills.skill_34"}} {{/if}}{{actor.system.skills.skill_34.name}} ({{actor.system.skills.skill_34.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_34" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('34',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_34_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_34.name" value="{{#if (eq actor.system.skills.skill_34.name "")}} {{localize "system.skills.skill_34"}} {{/if}}{{actor.system.skills.skill_34.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_34.value" type="number" value="{{actor.system.skills.skill_34.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('34',true)"></i>
+                                        </div>
+
+                                        <div id="skill_35" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'35')">{{#if (eq actor.system.skills.skill_35.name "")}} {{localize "system.skills.skill_35"}} {{/if}}{{actor.system.skills.skill_35.name}} ({{actor.system.skills.skill_35.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_35" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('35',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_35_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_35.name" value="{{#if (eq actor.system.skills.skill_35.name "")}} {{localize "system.skills.skill_35"}} {{/if}}{{actor.system.skills.skill_35.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_35.value" type="number" value="{{actor.system.skills.skill_35.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('35',true)"></i>
+                                        </div>
+
+                                        <div id="skill_36" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'36')">{{#if (eq actor.system.skills.skill_36.name "")}} {{localize "system.skills.skill_36"}} {{/if}}{{actor.system.skills.skill_36.name}} ({{actor.system.skills.skill_36.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_36" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('36',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_36_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_36.name" value="{{#if (eq actor.system.skills.skill_36.name "")}} {{localize "system.skills.skill_36"}} {{/if}}{{actor.system.skills.skill_36.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_36.value" type="number" value="{{actor.system.skills.skill_36.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('36',true)"></i>
+                                        </div>
+
+                                        <div id="skill_37" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'37')">{{#if (eq actor.system.skills.skill_37.name "")}} {{localize "system.skills.skill_37"}} {{/if}}{{actor.system.skills.skill_37.name}} ({{actor.system.skills.skill_37.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_37" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('37',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_37_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_37.name" value="{{#if (eq actor.system.skills.skill_37.name "")}} {{localize "system.skills.skill_37"}} {{/if}}{{actor.system.skills.skill_37.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_37.value" type="number" value="{{actor.system.skills.skill_37.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('37',true)"></i>
+                                        </div>
+
+                                        <div id="skill_38" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'38')">{{#if (eq actor.system.skills.skill_38.name "")}} {{localize "system.skills.skill_38"}} {{/if}}{{actor.system.skills.skill_38.name}} ({{actor.system.skills.skill_38.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_38" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('38',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_38_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_38.name" value="{{#if (eq actor.system.skills.skill_38.name "")}} {{localize "system.skills.skill_38"}} {{/if}}{{actor.system.skills.skill_38.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_38.value" type="number" value="{{actor.system.skills.skill_38.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('38',true)"></i>
+                                        </div>
+
+                                        <div id="skill_39" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'39')">{{actor.system.skills.skill_39.name}} ({{actor.system.skills.skill_39.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_39" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('39',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_39_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_39.name" value="{{actor.system.skills.skill_39.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_39.value" type="number" value="{{actor.system.skills.skill_39.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('39',true)"></i>
+                                        </div>
+
+                                        <div id="skill_40" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'40')">{{actor.system.skills.skill_40.name}} ({{actor.system.skills.skill_40.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_40" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('40',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_40_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_40.name" value="{{actor.system.skills.skill_40.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_40.value" type="number" value="{{actor.system.skills.skill_40.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('40',true)"></i>
+                                        </div>
+
+                                        <div id="skill_41" style="display: flex;" class="skill_base">
+                                            <span class="active_skill"><a class="test_skill" onclick="showStandardCheck(0,'41')">{{actor.system.skills.skill_41.name}} ({{actor.system.skills.skill_41.value}})</a></span>
+                                            <a style="margin-top:2px;padding-right: 5px;"><i id="quick_41" class="fas fa-bolt"></i></a>
+                                            <i style="margin-top:2px;" onclick="edit_skill('41',false)" class="fas fa-cog"></i>
+                                        </div>                    
+                                        <div id="skill_41_edit" style="display: none;" class="skill_base">
+                                            <input class="skill_name" type="text" name="system.skills.skill_41.name" value="{{actor.system.skills.skill_41.name}}"/>
+                                            <input class="skill_value" name="system.skills.skill_41.value" type="number" value="{{actor.system.skills.skill_41.value}}" />
+                                            <i class="skill_edit fas fa-check" onclick="edit_skill('41',true)"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="tab_content">
+                        <td colspan="5">
+                            <section>  
+                                {{#each actor.artifacts as |artifact id|}}
+                                    <div class="artifact_base">
+                                        <span id="{{artifact._id}}" class="artifact_delete fas fa-trash"></span>
+                                        <span class="artifact_title">{{artifact.name}}</span>
+                                        <p class="artifact_description">{{artifact.system.description}}</p>
+                                    </div>
+                                {{/each}}
+                            </section>
+                        </td>
+                    </tr>
+                    <tr class="tab_content">
+                        <td colspan="5">
+                            <div class="spell_potion_list">
+                                {{#each actor.spells as |spell id|}}
+                                    <div class="spell_potion">
+                                        {{#if (eq spell.system.difficult_00 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{spell.system.difficult_00}}</span>{{/if}}
+                                        {{#if (eq spell.system.difficult_01 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{spell.system.difficult_01}}</span>{{/if}}
+                                        {{#if (eq spell.system.difficult_02 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{spell.system.difficult_02}}</span>{{/if}}
+                                        <span class="spell_potion_title">{{spell.name}}</span>
+                                        <i id="{{spell._id}}" class="spell_potion_delete fas fa-trash"></i>
+                                        <i onclick="showInfo('{{spell.name}}','{{spell.system.description}}')" class="spell_potion_delete fas fa-book"></i>        
+                                    </div>
+                                {{/each}}  
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="tab_content">
+                        <td colspan="5">
+                            <div class="spell_potion_list">
+                                {{#each actor.potions as |potion id|}}
+                                <div class="spell_potion">
+                                    {{#if (eq potion.system.difficult_00 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{potion.system.difficult_00}}</span>{{/if}}
+                                    {{#if (eq potion.system.difficult_01 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{potion.system.difficult_01}}</span>{{/if}}
+                                    {{#if (eq potion.system.difficult_02 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{potion.system.difficult_02}}</span>{{/if}}
+                                    <span class="spell_potion_title">{{potion.name}}</span>
+                                    <i id="{{potion._id}}" class="spell_potion_delete fas fa-trash"></i>
+                                    <i onclick="showInfo('{{potion.name}}','{{potion.system.description}}')" class="spell_potion_delete fas fa-book"></i>        
+                                </div>
+                            {{/each}}  
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+   </table>
+   <script>
+        var hidden_flex = document.getElementById('hidden_flex');
+        var flex_option = document.getElementById('flex_'+hidden_flex.value);
+        flex_option.setAttribute("selected","selected");
+
+        var tab_value = document.getElementById('tab_value');
+        var tab_option = document.getElementById('tab_'+tab_value.value);
+        tab_option.setAttribute("checked","checked");     
+        
+        var body_value = document.getElementById('body_value');
+        var body_option = document.getElementById('body_'+body_value.value);
+        var body_text = document.getElementById('body_text_'+body_value.value);
+        body_option.setAttribute("checked","checked");
+        body_text.setAttribute("style","");
+
+        var mind_value = document.getElementById('mind_value');
+        var mind_option = document.getElementById('mind_'+mind_value.value);
+        var mind_text = document.getElementById('mind_text_'+mind_value.value);
+        mind_option.setAttribute("checked","checked");
+        mind_text.setAttribute("style","");
+
+        var tabs = document.getElementsByClassName('main_tabs');
+        var tabs_content = document.getElementsByClassName('tab_content');
+
+        setTab(tab_value.value);
+
+        var standard_penalty = document.getElementById('standard_penalty');
+        
+        var radio_skill1 = document.getElementById('radio_skill1');
+        var radio_skill2 = document.getElementById('radio_skill2');
+        var radio_attr1 = document.getElementById('radio_attr1');
+        var radio_attr2 = document.getElementById('radio_attr2');
+
+        function stdTestSkill(row, selected)
+        {
+            var s_row = undefined;
+            if (row == 0) s_row = document.getElementById('first_var');      
+                else s_row = document.getElementById('second_var'); 
+                s_row.innerHTML = '';
+            var skill_content = document.getElementsByClassName('test_skill');
+            for (var i=0; i<42; i++)
+            {
+                var set_sel = '';
+                if (selected != null)
+                {
+                    if (Number(selected) == Number(i))
+                    {
+                        set_sel = 'selected';
+                    }
+                }
+                s_row.innerHTML += '<option value="'+i+'" '+set_sel+'>'+skill_content[i].innerHTML+'</option>';
+            }
+        }
+
+        function stdTestAttr(row, selected)
+        {
+            var s_row = undefined;
+            if (row == 0) s_row = document.getElementById('first_var');      
+                else s_row = document.getElementById('second_var'); 
+                s_row.innerHTML = '';
+            var skill_content = document.getElementsByClassName('test_attr');
+            for (var i=0; i<5; i++)
+            {
+                var set_sel = '';
+                if (selected != null)
+                {
+                    if (Number(selected) == Number(i))
+                    {
+                        set_sel = 'selected';
+                    }
+                }
+                s_row.innerHTML += '<option value="'+i+'" '+set_sel+'>'+skill_content[i].innerHTML+'</option>';
+            }
+        }
+
+        function setTab(tab)
+        {
+            for (var i=0; i < tabs.length; i++)
+            {
+                tabs[i].setAttribute("class","main_tabs");
+                tabs_content[i].setAttribute("class","tab_content");
+            }
+            tabs[tab].setAttribute("class","main_tabs tabs_active");
+            tabs_content[tab].setAttribute("class","tab_content tab_active");
+            
+            var tab_mo = document.getElementById('tab_'+tab);
+            tab_mo.click();
+        }
+
+        function edit_skill(index,state)
+        {
+            var skill = document.getElementById('skill_'+index);
+            var skill_edit = document.getElementById('skill_'+index+'_edit');
+            if (state == false)
+            {
+                skill.setAttribute("style","display:none");
+                skill_edit.setAttribute("style","display:flex");
+            } else 
+            {
+                skill.setAttribute("style","display:flex");
+                skill_edit.setAttribute("style","display:none");
+            }
+        }
+
+        var info_block = document.getElementById('info_block');
+        var check_block = document.getElementById('check_block');
+        var info_block_title = document.getElementById('info_block_title');
+        var info_block_description = document.getElementById('info_block_description');
+       
+        function showInfo(title,description)
+        {
+            info_block_title.innerHTML = title;
+            info_block_description.innerHTML = description;
+            info_block.setAttribute("style","display:block;");
+        }
+
+            
+        function showStandardCheck(type,index)
+        {
+            check_block.setAttribute("style","display:block;");
+            if (type == 0)
+            {
+                radio_skill1.click();
+                stdTestSkill(0, index);
+            }
+        }
+       
+        function setPenalty()
+        {
+            var penalty = 0;
+            switch (Number(body_value.value))
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    penalty = body_value.value;
+                    break;
+                case 4:
+                    penalty = 5;
+                    break;
+                case 5:
+                    penalty = 7;
+                    break;
+                case 6:
+                    penalty = "—";
+                    break;
+            }
+            switch (Number(mind_value.value))
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    if (penalty!="—")penalty = Number(penalty) + Number(mind_value.value);
+                    break;
+                case 4:
+                    if (penalty!="—")penalty = Number(penalty) + Number(5);
+                    break;
+                case 5:
+                    if (penalty!="—")penalty = Number(penalty) + Number(7);
+                    break;
+                case 6:
+                    penalty = "—";
+                    break;
+            }
+            
+            standard_penalty.innerHTML = penalty;
+        }
+        setPenalty();
+
+        function hideInfo()
+        {
+            info_block.setAttribute("style","display:none;");
+            check_block.setAttribute("style","display:none;");
+        }
+   </script>
+</form>

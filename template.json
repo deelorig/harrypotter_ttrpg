@@ -1,0 +1,135 @@
+{
+    "Actor": {
+        "types": ["Wizard"],
+            "Wizard": {
+                "label":"system.labels.wizard",
+                "bio":
+                {
+                    "last_tab":
+                    {
+                        "value":0
+                    },
+                    "lineage":"",
+                    "profession":"",
+                    "school":"",
+                    "year":
+                    {
+                        "value":1,
+                        "max":7,
+                        "min":1
+                    },
+                    "house":"",
+                    "notes":""
+                },
+                "attributes":
+                {
+                    "vitality":0,
+                    "speed":0,
+                    "wits":0,
+                    "knowledge":0,
+                    "focus":0
+                },
+                "pet":"",
+                "points":0,
+                "wand":
+                {
+                    "length":"",
+                    "core":"",
+                    "flex":0
+                },
+                "skills":
+                {
+                    "skill_00":{"name":"","value":0},
+                    "skill_01":{"name":"","value":0},
+                    "skill_02":{"name":"","value":0},
+                    "skill_03":{"name":"","value":0},
+                    "skill_04":{"name":"","value":0},
+                    "skill_05":{"name":"","value":0},
+                    "skill_06":{"name":"","value":0},
+                    "skill_07":{"name":"","value":0},
+                    "skill_08":{"name":"","value":0},
+                    "skill_09":{"name":"","value":0},
+                    "skill_10":{"name":"","value":0},
+                    "skill_11":{"name":"","value":0},
+                    "skill_12":{"name":"","value":0},
+                    "skill_13":{"name":"","value":0},
+                    "skill_14":{"name":"","value":0},
+                    "skill_15":{"name":"","value":0},
+                    "skill_16":{"name":"","value":0},
+                    "skill_17":{"name":"","value":0},
+                    "skill_18":{"name":"","value":0},
+                    "skill_19":{"name":"","value":0},
+                    "skill_20":{"name":"","value":0},
+                    "skill_21":{"name":"","value":0},
+                    "skill_22":{"name":"","value":0},
+                    "skill_23":{"name":"","value":0},
+                    "skill_24":{"name":"","value":0},
+                    "skill_25":{"name":"","value":0},
+                    "skill_26":{"name":"","value":0},
+                    "skill_27":{"name":"","value":0},
+                    "skill_28":{"name":"","value":0},
+                    "skill_29":{"name":"","value":0},
+                    "skill_30":{"name":"","value":0},
+                    "skill_31":{"name":"","value":0},
+                    "skill_32":{"name":"","value":0},
+                    "skill_33":{"name":"","value":0},
+                    "skill_34":{"name":"","value":0},
+                    "skill_35":{"name":"","value":0},
+                    "skill_36":{"name":"","value":0},
+                    "skill_37":{"name":"","value":0},
+                    "skill_38":{"name":"","value":0},
+                    "skill_39":{"name":"","value":0},
+                    "skill_40":{"name":"","value":0},
+                    "skill_41":{"name":"","value":0}  
+                },
+                "body": {
+                    "value": 0,
+                    "max": 6,
+                    "min":0 
+                },
+                "mind": {
+                    "value": 0,
+                    "max": 6,
+                    "min":0 
+                }
+            }
+            
+    },
+    "Item": {
+        "types":["wand_wood","artifact","spell","potion"],
+        "wand_wood":{
+                "label":"system.labels.wand_wood",
+                "name":"",
+                "description":""
+            },
+        "artifact":{
+                "label":"system.labels.artifact",
+                "name":"",
+                "description":""
+            },
+        "spell":
+        {
+            "label":"system.labels.spell",
+            "name":"",
+            "description":"",
+            "difficult_00":0,
+            "done_00":false,
+            "difficult_01":0,
+            "done_01":false,
+            "difficult_02":0,
+            "done_02":false
+        },
+        "potion":
+        {
+            "label":"system.labels.potion",
+            "name":"",
+            "description":"",
+            "difficult_00":0,
+            "done_00":false,
+            "difficult_01":0,
+            "done_01":false,
+            "difficult_02":0,
+            "done_02":false
+        }
+    }
+}

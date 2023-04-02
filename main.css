@@ -1,0 +1,551 @@
+
+@font-face {
+    font-family: hpfont;
+    src: url("fonts/hpfont.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: user_text;
+    src: url("fonts/user_text.ttf") format("truetype");
+}
+
+form
+{
+    position: relative;
+}
+
+table {
+    width:100%;
+    border-spacing: 0px;
+}
+td
+{
+    padding:0px;
+}
+
+.avatar
+{
+    width:100%;
+    height:250px;
+    background: #c6c6c6;
+    display: block;
+    object-fit: cover;
+    cursor: pointer!important;
+}
+
+.avatar_border
+{
+    width:100%;
+    height:253px;
+    position:absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    display: block;
+    object-fit: cover;
+    cursor: pointer!important;
+}
+
+.col0
+{
+    width:200px;
+    vertical-align: top;
+    position: relative;
+}
+
+.col1
+{
+    vertical-align: top;
+}
+
+.col0_title
+{
+    display: block;
+    font-family: user_text;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.col0_group
+{
+    width: 100%; text-align: center;
+}
+
+.col0_margin
+{
+    margin-top:15px;
+}
+
+.col0_btitle
+{
+    display: block;
+    width: 100%;
+    font-family: hpfont;
+    text-align: center;
+    font-size: 35px;
+    margin-bottom:10px;
+}
+
+.section_wand
+{
+    box-sizing: border-box; 
+    display: block; 
+    width: 100%; 
+    height: auto; 
+    border: 2px dotted #000;
+    margin: 5px 0;
+}
+
+.section_wand div
+{
+    width:100%; 
+    height:100%;
+    position: relative;
+}
+
+.section_wand span
+{
+    font-size: 20px; 
+    display: block; 
+    text-align: center; 
+    width: 198px; 
+    font-family: user_text!important;
+    height: 25px;
+}
+
+.section_wand_bold
+{
+    font-weight: 800;
+}
+
+.section_wand_overflow
+{
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.wand_length
+{
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box; 
+    text-align: center;
+    font-size: 20px!important;
+    text-align: center!important;
+    font-family: user_text!important;
+}
+
+.wand_select
+{
+    box-sizing: border-box; 
+    text-align: center; 
+    width: 100%; 
+    font-size: 20px!important;
+    text-align: center!important;
+    margin: 5px 0;
+    font-family: user_text;
+}
+
+.name
+{
+    display:flex; 
+    width:100%; 
+    box-sizing: border-box; 
+    padding-left: 5px;
+}
+
+.name span
+{
+    font-family: hpfont;
+    font-size:35px; 
+    box-sizing: border-box; 
+    padding:0px 15px 0 5px;
+}
+
+.name input
+{
+    box-sizing: border-box; 
+    text-align: center; 
+    font-size:30px;
+    height: 40px; 
+    flex-grow: 1;
+    font-family: user_text;
+}
+
+.attribute
+{
+    width:100%; 
+    box-sizing: border-box; 
+    padding-left: 5px;
+    display: block;
+}
+
+.attribute span
+{
+    font-size:25px; 
+    box-sizing: border-box; 
+    font-family: user_text;
+    padding:0px 0px 0 5px;
+}
+
+.attribute input
+{
+    box-sizing: border-box; 
+    text-align: center; 
+    font-size:20px; 
+    width:50px;
+    height:26px;
+    float: right;
+}
+.familliar
+{
+    box-sizing: border-box!important; 
+    text-align: center!important;
+    border-left: 0!important;
+    border-top: 0!important;
+    border-right: 0!important;
+    border-bottom: 2px dotted #000!important;
+    padding-left: 8px!important; 
+    font-size:20px!important; 
+    font-family: user_text!important;
+    height:26px!important;
+    display: block!important;
+    width: 100%!important;
+}
+.school_info
+{
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.school_info span
+{
+    font-family: user_text;
+    font-weight: 800;
+    display: block; 
+    font-size: 25px;
+}
+
+.school_info input
+{
+    box-sizing: border-box; 
+    font-size: 25px;
+    font-family: user_text;
+    text-align: center;
+    width:75%;
+}
+
+.story_points
+{
+    text-align: center; vertical-align: middle;
+}
+
+.story_points span
+{
+    display: block;
+    font-family: hpfont;
+    font-size: 30px;
+}
+
+.story_points input
+{
+    box-sizing: border-box; 
+    font-size: 25px; 
+    text-align: center;
+    width:40px;
+    height:40px;
+    border-radius: 20px;
+}
+
+.main_tabs
+{
+
+    box-sizing: border-box; 
+    text-align: center; 
+    vertical-align: middle; 
+    font-size: 30px;
+    font-family: hpfont;
+    cursor: pointer;
+    padding: 3px 0;
+
+    background: #6b6b6bc6;
+}
+
+.tabs_active
+{
+    background: #fff0;
+    border: 1px 1px 0 1px solid #000;
+}
+
+.tab_content
+{
+    display: none;
+}
+
+.tab_content td
+{
+    padding: 5px;
+    vertical-align: top;
+}
+.tab_active
+{
+    display: table-row;
+}
+
+textarea
+{
+    height:200px;
+    box-sizing: border-box; 
+    display: block;
+    font-family: user_text!important;
+    width:100%; 
+    font-size: 20px;
+    resize: none;
+}
+
+.skill_base
+{
+    display:flex; 
+    width:100%; 
+    padding: 2.5px 0; 
+    box-sizing: border-box;
+}
+
+.skill_name
+{
+    box-sizing: border-box;
+    border-left: 0!important; 
+    border-top: 0!important; 
+    border-right: 0!important; 
+    border-bottom: 2px dotted #000!important; 
+    flex-grow: 1!important; 
+    margin-left:0px!important;
+    font-family: user_text!important;
+}
+
+.skill_value
+{
+    box-sizing: border-box; 
+    border-left: 0!important; 
+    border-top: 0!important; 
+    border-right: 0!important; 
+    border-bottom: 2px dotted #000!important;  
+    width:50px!important;margin-left:5px!important;
+    font-family: user_text!important;
+    text-align: right!important;
+}
+
+.skill_edit
+{
+    margin:5px 0px 0px 5px!important;
+}
+
+.active_skill
+{
+    box-sizing: border-box; 
+    border: 0!important; 
+    font-size: 17px; 
+    flex-grow: 1!important; 
+    text-align: center; 
+    font-family: user_text!important;
+}
+
+.artifact_base
+{
+    position: relative!important; 
+    box-sizing: border-box!important; 
+    width:100%!important; 
+    padding:10px!important; 
+    margin: 2.5px 0px!important;
+    border: 2px dotted #000!important;
+}
+
+.artifact_title
+{
+    font-size: 25px!important; 
+    font-weight: 800!important; 
+    display: block!important; 
+    text-align: center;
+    font-family: user_text!important;
+}
+
+.artifact_description
+{
+    padding: 0; 
+    margin: 0; 
+    font-size: 20px; 
+    display: block; 
+    text-align: center;
+    font-family: user_text!important;
+}
+
+.artifact_delete
+{
+    cursor: pointer; 
+    position: absolute; 
+    top:10px; 
+    right:10px;
+}
+
+.control_layer
+{
+    z-index: 3!important; 
+    position: absolute!important; 
+    width: 100%!important; 
+    height: 100%!important; 
+    left:0!important;
+    background: #ffffff67; 
+    top:0!important;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+.control_layer:hover
+{
+    opacity: 1;
+}
+
+.control_layer i
+{
+    position: absolute; 
+    right: 2.5px; 
+    top:2.5px;
+}
+
+.info_block
+{
+    position: absolute; 
+    left: calc(50% - 250px); 
+    padding:10px; 
+    top: 150px; 
+    box-shadow: 0 0 8px 9px rgb(0 0 0 / 20%); 
+    height:auto; 
+    box-sizing: border-box; 
+    width: 500px; 
+    z-index: 5; 
+    background:#d8d6cd;
+}
+
+.info_block span
+{
+    font-family: user_text; 
+    display:block; 
+    text-align: center; 
+    font-size: 25px; 
+}
+
+.info_block select
+{
+    box-sizing: border-box; 
+    margin: 0 10%; 
+    width: 80%; 
+    display: block;
+    font-size: 20px; 
+    font-family: user_text;
+}
+
+.standard_block_roll
+{
+    text-align: center;
+    padding-top: 15px; 
+    padding-bottom: 5px;
+}
+.standard_block_roll label
+{
+    box-sizing: border-box; 
+    padding: 5px 20px; 
+    border: 1px solid #000; 
+    font-size: 25px;  
+    font-family: user_text;
+    cursor:pointer;
+    transition-duration: 0.5s;
+}
+
+.standard_block_roll label:hover
+{
+    background: #0000002a;
+}
+
+.standard_block_title
+{
+    text-align: center;
+}
+
+.standard_block_title label
+{
+    font-size: 20px; 
+    font-family: user_text;
+}
+
+.standard_block_title input
+{
+    margin-right:5px;
+}
+
+.info_block i
+{
+    position: absolute; 
+    top:10px; 
+    right:10px; 
+    cursor: pointer;
+}
+
+.spell_potion_list
+{
+    width: 100%; 
+    column-count: 3; 
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.spell_potion
+{
+    padding: 2.5px; 
+    box-sizing: border-box;
+}
+
+.spell_potion_difficult
+{
+    width: 23px; 
+    height: 23px; 
+    text-align: center; 
+    padding:2px; 
+    display: inline-block; 
+    box-sizing: border-box; 
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.spell_potion_title
+{
+    font-size: 19px; 
+    padding-left:3px;
+    font-family: user_text;
+    flex-grow: 1; 
+    box-sizing: border-box;
+}
+
+.spell_potion_delete
+{
+    float:right; 
+    padding: 4.5px;
+}
+
+.generate_wand
+{
+    display: block; 
+    border: 1px solid #000; 
+    padding: 2px; 
+    font-size: 20px;
+    font-family: user_text; 
+    text-align: center; 
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.generate_wand:hover
+{
+    background: #0000002a;
+}

@@ -1,0 +1,168 @@
+{
+    "system":
+    {
+        "name":"Name",
+        "create_wand":"Create Wand",
+        "attributes":
+        {
+            "vitality":"Vitality",
+            "speed":"Speed",
+            "wits":"Wits",
+            "knowledge":"Knowledge",
+            "focus":"Focus"
+        },
+        "difficulty":"Difficulty",
+        "difficulty_levels":
+        {
+            "0":"Elementary (3)",
+            "1":"Straightforward (6)",
+            "2":"Tricky (12)",
+            "3":"Challenging (15)",
+            "4":"Ambitious (18)",
+            "5":"Formidable (21)",
+            "6":"Almost Impossible (25)"
+        },
+        "penalty":"Penalty",
+        "standard_test":"Standard Test",
+        "standard_block":
+        {
+            "skill":"Skill",
+            "attribute":"Attribute",
+            "roll":"Roll"
+        },
+        "success_levels":
+        {
+            "0":"Embarrassing failure",
+            "1":"Failure",
+            "2":"Success",
+            "3":"Impressive success",
+            "4":"Unbelievable success"
+        },
+        "labels":
+        {
+            "wizard":"Wizard",
+            "wand_wood":"Wood",
+            "wand_bonus":"Bonus",
+            "artifact":"Artifact",
+            "spell":"Spell",
+            "potion":"Potion"
+        },    
+        "results":
+        {
+            "success":"Success",
+            "failure":"Failure"
+        },
+        "pet":"Pet...",
+        "story_points":"Story Points",
+        "sheet":
+        {
+            "bio":"Bio",
+            "skills":"Skills",
+            "artifacts":"Artifacts",
+            "potions":"Potions",
+            "spells":"Spells",
+            "profession":"Profession...",
+            "lineage":"Lineage",
+            "health":"Health",
+            "wand":"Wand",
+            "body":"Body",
+            "mind":"Mind",
+            "notes":"Notes",
+            "school":"School",
+            "year":"Year",
+            "house":"House"
+        },
+        "body_status":
+        {
+            "ok":"Ok",
+            "shaken":"Shaken +1",
+            "bruised":"Bruised +2",
+            "bloodied":"Bloodied +3",
+            "broken":"Broken +5",
+            "fading":"Fading +7",
+            "lifeless":"Lifeless"
+        },
+        "mind_status":
+        {
+            "ok":"Ok",
+            "shaken":"Rattled +1",
+            "bruised":"Dazed +2",
+            "bloodied":"Drained +3",
+            "broken":"Confused +5",
+            "fading":"Raving +7",
+            "lifeless":"Mindless"
+        },
+        "wand":
+        {
+            "wood":"Wood",
+            "length":"Length",
+            "core":"Core",
+            "flex":"Flex",
+            "bonus":"Bonus",
+            "flexibility":
+            {
+                "2":"Brittle",
+                "3":"Unyielding",
+                "4":"Stif",
+                "5":"Inflexible",
+                "6":"Rigid",
+                "7":"Quite rigid",
+                "8":"Pliable",
+                "9":"Reasonably springy",
+                "10":"Springy",
+                "11":"Supple",
+                "12":"Nice and supple",
+                "13":"Fairly flexible",
+                "14":"Flexible",
+                "15":"Nice and flexible",
+                "16":"Very flexible",
+                "17":"Slightly bendy",
+                "18":"Bendy",
+                "19":"Quite whippy",
+                "20":"Swishy"
+            }
+        },
+        "skills":
+        {
+            "skill_0":"Alchemy",
+            "skill_1":"Ancient Runes",
+            "skill_2":"Ancient Studies",
+            "skill_3":"Archivist",
+            "skill_4":"Arithmancy",
+            "skill_5":"Art",
+            "skill_6":"Astronomy",
+            "skill_7":"Authority",
+            "skill_8":"Balance",
+            "skill_9":"Broomstick Flying",
+            "skill_10":"Charms",
+            "skill_11":"Chicanery",
+            "skill_12":"Concealment",
+            "skill_13":"Crafting",
+            "skill_14":"Dark Arts",
+            "skill_15":"D.A.D.A.",
+            "skill_16":"Disguise",
+            "skill_17":"Divination",
+            "skill_18":"Duelling",
+            "skill_19":"Herbology",
+            "skill_20":"History of Magic",
+            "skill_21":"Law",
+            "skill_22":"Magical Creatures",
+            "skill_23":"Magical Theory",
+            "skill_24":"Muggle Studies",
+            "skill_25":"Music",
+            "skill_26":"Observation",
+            "skill_27":"Occlumency",
+            "skill_28":"Potions",
+            "skill_29":"Prestige",
+            "skill_30":"Riding",
+            "skill_31":"Strategy",
+            "skill_32":"Skirmishing",
+            "skill_33":"Stealth",
+            "skill_34":"Tracking",
+            "skill_35":"Transfiguration",
+            "skill_36":"Transportation",
+            "skill_37":"Trivia",
+            "skill_38":"Wandlore"
+        }
+    }
+}
