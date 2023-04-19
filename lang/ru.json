@@ -45,7 +45,8 @@
             "wand_bonus":"Бонус",
             "artifact":"Артефакт",
             "spell":"Заклинание",
-            "potion":"Зелье"
+            "potion":"Зелье",
+            "description":"Описание"
         },
         "results":
         {

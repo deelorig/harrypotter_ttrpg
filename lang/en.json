@@ -45,7 +45,8 @@
             "wand_bonus":"Bonus",
             "artifact":"Artifact",
             "spell":"Spell",
-            "potion":"Potion"
+            "potion":"Potion",
+            "description":"Описание"
         },    
         "results":
         {

@@ -35,12 +35,21 @@ export default class MSActorSheet extends ActorSheet{
         //click - событие нажатия на объект, есть еще куча других событий, но они пока не нужны. 
         //Это может например быть событие наведения на элемент, двойной длин и т.д. про них можно почитать погуглив jQuery events
         //html.find(".XXX").click(this.YYY.bind(this));
+        html.find(".fa-book").click(this._showSpell.bind(this));
         html.find(".stadard_roll").click(this._standardTest.bind(this));
         html.find(".attribute_quick").click(this._quickTest.bind(this));
         html.find(".fa-bolt").click(this._quickTest.bind(this));
         html.find(".fa-trash").click(this._onItemDelete.bind(this));
         html.find(".generate_wand").click(this._WandGenerator.bind(this));
         super.activateListeners(html);
+    }
+
+    async _showSpell(event)
+    {
+        var cur_spell = this.actor.items.filter(function (item) {return item.id == event.currentTarget.getAttribute("id");});
+        info_block_title.innerHTML = cur_spell[0].name;
+        info_block_description.innerHTML = cur_spell[0].system.description;
+        info_block.setAttribute("style","display:block;");
     }
 
     //Пример функции, которая будет активирована при нажатии

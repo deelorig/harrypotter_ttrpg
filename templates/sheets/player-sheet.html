@@ -675,7 +675,7 @@
                                         {{#if (eq spell.system.difficult_02 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{spell.system.difficult_02}}</span>{{/if}}
                                         <span class="spell_potion_title">{{spell.name}}</span>
                                         <i id="{{spell._id}}" class="spell_potion_delete fas fa-trash"></i>
-                                        <i onclick="showInfo('{{spell.name}}','{{spell.system.description}}')" class="spell_potion_delete fas fa-book"></i>        
+                                        <i id="{{spell._id}}" class="spell_potion_delete fas fa-book"></i>        
                                     </div>
                                 {{/each}}  
                             </div>
@@ -691,7 +691,7 @@
                                     {{#if (eq potion.system.difficult_02 0)}}<span class="spell_potion_difficult">—</span>{{else}}<span class="spell_potion_difficult">{{potion.system.difficult_02}}</span>{{/if}}
                                     <span class="spell_potion_title">{{potion.name}}</span>
                                     <i id="{{potion._id}}" class="spell_potion_delete fas fa-trash"></i>
-                                    <i onclick="showInfo('{{potion.name}}','{{potion.system.description}}')" class="spell_potion_delete fas fa-book"></i>        
+                                    <i id="{{potion._id}}" class="spell_potion_delete fas fa-book"></i>        
                                 </div>
                             {{/each}}  
                             </div>

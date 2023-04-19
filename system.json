@@ -2,7 +2,7 @@
     "id": "harrypotter_ttrpg",
     "title": "Harry Potter The Roleplaying Game",
     "description": "Harry Potter The Roleplaying Game is the most complete wizarding world RPG ever. Board the Hogwarts Express as a young wizard embarking on their first year at Hogwarts School of Witchcraft and Wizardry, or boost your character's skills and spells to play an older student with more powerful magic at their fingertips. You can even bypass Hogwarts altogether and jump straight into a wizarding career.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "compatibility": {
       "minimum": "10",
       "verified": "10.290",

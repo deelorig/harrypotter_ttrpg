@@ -1,12 +1,14 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-    </header>
+    <img style="object-fit: cover; display: block; width: 110px;height: 110px; cursor: pointer;" data-edit="img" src="{{item.img}}" title="{{item.name}}"/>
+    <div class="name">
+      <span style="padding-left: 0px;">{{localize "system.labels.artifact"}}</span>
+      <input type="text" placeholder="{{localize "system.labels.artifact"}}..." name="name" value="{{item.name}}"/>
+    </div>  
     <div>
       <table>
         <tr>
             <td>
-               <textarea name="system.description">{{item.system.description}}</textarea>
+               <textarea name="system.description" placeholder="{{localize "system.labels.description"}}">{{item.system.description}}</textarea>
             </td>
         </tr>
       </table>
